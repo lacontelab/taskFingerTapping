@@ -154,8 +154,8 @@ if afni_plugout_connected:
 #################################
 
 # Initialize OpenGL graphics screen.
-screen = VisionEgg.Core.Screen(size=SCREEN_SIZE, fullscreen=True)
-#screen = get_default_screen()
+#screen = VisionEgg.Core.Screen(size=SCREEN_SIZE, fullscreen=True)
+screen = get_default_screen()
 
 # Set the background color to white (RGBA).
 screen.parameters.bgcolor = (0.0,0.0,0.0,0.0)
