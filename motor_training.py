@@ -130,25 +130,31 @@ for ntr in range(TR_n):
     block_len_array.append(b)
 
 # try establishing connection to afni for plotting button presses
-afni_plugout_connected=1
+
 if AFNI_PLUGOUT:
-  afni_host_ip=afni.getAfniHostIP()
-  plugout_command ='plugout_drive -port 8100 -host %s' % afni_host_ip
-  ff=os.popen(plugout_command, 'w') 
-else:
-  afni_plugout_connected=0
+  afni_plugout_connected=1
+  try:
+    afni_host_ip=afni.getAfniHostIP()
+    plugout_command ='plugout_drive -port 8100 -host %s' % afni_host_ip
+    ff=os.popen(plugout_command, 'w') 
+  except:
+    afni_plugout_connected=0
 
 # initialize plot with button presses
 if afni_plugout_connected:
-  afni.closePlugPlot(ff, 'plot_0')
-  afni.openPlugPlot(ff, 'plot_0', 'button presses', 2, 0, TR_n, 'TRs', 0, 20, 'presses per TR', "left right")
+  try:
+    afni.closePlugPlot(ff, 'plot_0')
+    afni.openPlugPlot(ff, 'plot_0', 'button presses', 2, 0, TR_n, 'TRs', 0, 20, 'presses per TR', "left right")
+  except:
+    afni_plugout_connected=0
+
  
 #################################
 #  Initialize the various bits  #
 #################################
 
 # Initialize OpenGL graphics screen.
-screen = VisionEgg.Core.Screen(size=SCREEN_SIZE)
+screen = VisionEgg.Core.Screen(size=SCREEN_SIZE, fullscreen=True)
 #screen = get_default_screen()
 
 # Set the background color to white (RGBA).
@@ -288,6 +294,7 @@ def getState(t):
     global negFbTxtr, posFbTxtr
     global prevBlock, fbScore, fbScale
     global tcp_listner, startDetrend, dist_array, time_array, dist, dist_detrend
+    global afni_plugout_connected
 
     global l_count, r_count
 
@@ -373,7 +380,10 @@ def getState(t):
       
 
       if afni_plugout_connected:
-        afni.updatePlugPlot2(ff, 'plot_0', TRcount, l_count, r_count)
+        try:
+          afni.updatePlugPlot2(ff, 'plot_0', TRcount, l_count, r_count)
+        except:
+          afni_plugout_connected=0
 
       log_file.write("%5.3f;%d;%d;%5.3f;%5.3f;%5.3f;%d;%d;%d\n" % (t, int(currBlock), int(currShow), float(dist), float(dist_detrend), float(fbScore), int(fbScale), int(l_count), int(r_count)) )
       
