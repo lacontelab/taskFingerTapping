@@ -12,7 +12,7 @@ TCPIP_SIM     = 0     # Simulate TCPIP data by using data from LABEL_FILE
 TR_DUR        = 2     # TR duration in seconds
 IMAGE_SIZE    = (800,600)  # resolution of stimulus images
 SCREEN_SIZE   = (1024,768) # screen size 
-LABEL_FILE    = 'labels_train.dat' # label file controlling presentation
+LABEL_FILE    = 'labels_train_short.dat' # label file controlling presentation
 
 AFNI_PLUGOUT  = 1     # Set 1 to enable afni plugout plots
 
@@ -155,6 +155,7 @@ if afni_plugout_connected:
 
 # Initialize OpenGL graphics screen.
 screen = VisionEgg.Core.Screen(size=SCREEN_SIZE, fullscreen=True)
+#screen = VisionEgg.Core.Screen(size=SCREEN_SIZE, fullscreen=False)
 #screen = get_default_screen()
 
 # Set the background color to white (RGBA).
