@@ -130,7 +130,7 @@ for ntr in range(TR_n):
     block_len_array.append(b)
 
 # try establishing connection to afni for plotting button presses
-
+afni_plugout_connected=0
 if AFNI_PLUGOUT:
   afni_plugout_connected=1
   try:
