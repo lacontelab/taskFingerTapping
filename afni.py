@@ -22,17 +22,17 @@ def getAfniHostIP():
     hostname = 'undefined'
  
   # map AFNI host (TABS) to stimulus computer 
-  # R1081
+  # R1082
   if 'd1l-0000j2n9nn1' in hostname.lower():
     try:
-      afni_host_ip=socket.gethostbyname('tabs-mr1081')
+      afni_host_ip=socket.gethostbyname('tabs-mr1082')
     except:
       afni_host_ip=AFNI_DEFAULT_HOST_IP
 
-  # R1082
+  # R1081
   elif 'd1l-0000j2nbnn1' in hostname.lower():
     try:
-      afni_host_ip=socket.gethostbyname('tabs-mr1082')
+      afni_host_ip=socket.gethostbyname('tabs-mr1081')
     except:
       afni_host_ip=AFNI_DEFAULT_HOST_IP
 
