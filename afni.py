@@ -15,6 +15,8 @@ AFNI_PLOT_GEOM='1100x400+850+680'
 
 def getAfniHostIP():
 
+  AFNI_DEFAULT_HOST_IP='127.0.0.1'
+
   # get hostname of stimulus computer
   try: 
     hostname = socket.gethostname()
@@ -22,21 +24,21 @@ def getAfniHostIP():
     hostname = 'undefined'
  
   # map AFNI host (TABS) to stimulus computer 
-  # R1082
+  # R1082 (Win7)
   if 'd1l-0000j2n9nn1' in hostname.lower():
     try:
       afni_host_ip=socket.gethostbyname('tabs-mr1082')
     except:
       afni_host_ip=AFNI_DEFAULT_HOST_IP
 
-  # R1081
-  elif 'd1l-0000j2nbnn1' in hostname.lower():
+  # R1081 (Win10)
+  elif 'd1l-1000j2nbnn1' in hostname.lower():
     try:
       afni_host_ip=socket.gethostbyname('tabs-mr1081')
     except:
       afni_host_ip=AFNI_DEFAULT_HOST_IP
 
-  # CRC
+  # CRC (Win7)
   elif 'crc-mri-byhzcp1' in hostname.lower():
     try:
       afni_host_ip=socket.gethostbyname('tabs-mr1052')
@@ -47,6 +49,7 @@ def getAfniHostIP():
     afni_host_ip=AFNI_DEFAULT_HOST_IP
     
   return afni_host_ip
+
 
 '''
 Could someday write a general updatePlugPlot that takes arrays... But for now...
